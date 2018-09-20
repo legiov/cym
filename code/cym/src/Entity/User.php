@@ -6,18 +6,24 @@
  * Time: 0:36
  */
 
-namespace App\Entity\User;
+namespace App\Entity;
 
+use App\Security\Interfaces\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class User
  * @ORM\Entity()
  * @ORM\Table(name="user")
  *
- * @package App\Entity\User
+ * @package App\Entity
+ * @UniqueEntity(fields={"email"}, message="It looks like your already have an account!")
+ * @UniqueEntity(fields={"mobileNumber"}, message="This mobile number already exist")
+ *
  */
-class User
+class User implements EntityInterface, UserInterface
 {
     /**
      * @var integer
@@ -31,24 +37,36 @@ class User
     /**
      * @var string
      * @ORM\Column(name="name", type="string", nullable=false)
+     * @Assert\NotBlank(message="Please inter name")
      */
     private $name;
 
     /**
      * @var string
      * @ORM\Column(name="surname", type="string", nullable=false)
+     * @Assert\NotBlank(message="Please inter surname")
      */
     private $surname;
 
     /**
      * @var string
      * @ORM\Column(name="email", type="string", nullable=false)
+     * @Assert\NotBlank(message="Please inter email")
+     *
      */
     private $email;
 
     /**
      * @var string
+     * @ORM\Column(name="password", type="string", nullable=false)
+     * @Assert\NotBlank(message="Please inter password")
+     */
+    private $password;
+
+    /**
+     * @var string
      * @ORM\Column(name="mobile_number", type="string", nullable=false)
+     * @Assert\NotBlank(message="Please inter mobile phone")
      */
     private $mobileNumber;
 
@@ -61,27 +79,15 @@ class User
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
-     *
-     * @return User
-     */
-    public function setId(int $id): User
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
      * @return string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -101,7 +107,7 @@ class User
     /**
      * @return string
      */
-    public function getSurname(): string
+    public function getSurname(): ?string
     {
         return $this->surname;
     }
@@ -121,7 +127,7 @@ class User
     /**
      * @return string
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -141,7 +147,7 @@ class User
     /**
      * @return string
      */
-    public function getMobileNumber(): string
+    public function getMobileNumber(): ?string
     {
         return $this->mobileNumber;
     }
@@ -161,7 +167,7 @@ class User
     /**
      * @return string
      */
-    public function getAvatar(): string
+    public function getAvatar(): ?string
     {
         return $this->avatar;
     }
@@ -178,4 +184,23 @@ class User
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param string $password
+     *
+     * @return User
+     */
+    public function setPassword(string $password): User
+    {
+        $this->password = $password;
+
+        return $this;
+    }
 }

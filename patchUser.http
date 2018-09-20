@@ -1,0 +1,6 @@
+PATCH http://cym.loc/users/2
+Content-Type: application/json
+
+< testUser3.json
+
+###

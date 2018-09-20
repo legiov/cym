@@ -1,0 +1,6 @@
+PUT http://cym.loc/users/2
+Content-Type: application/json
+
+< testUser2.json
+
+###
