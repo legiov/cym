@@ -13,7 +13,7 @@
    ```
 6. 
     ```bash
-    docker-compose exec --user dockuser php72
+    docker-compose exec --user dockuser php72 bash
     cd cym
     cp .env.dist .env
     composer install
