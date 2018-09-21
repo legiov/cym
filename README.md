@@ -15,7 +15,9 @@
     ```bash
     docker-compose exec --user dockuser php72
     cd cym
+    cp .env.dist .env
     composer install
+    php bin/console do:da:cr
     php bin/console doc:mi:mi
     ``` 
 7. PROFIT

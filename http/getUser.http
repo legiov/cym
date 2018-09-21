@@ -1,8 +1,8 @@
-GET http://cym.loc/users/2
+GET http://cym.loc/users
 X-Debug-Token: PHPSTORM
 X-Debug-Token-Link: http://cym.loc/_profiler/PHPSTORM
 X-Previous-Debug-Token: PHPSTORM
-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiY3ltX2RkIiwidXNlcl9pZCI6IjEiLCJleHAiOjE1Mzc1MjUyMTJ9.ApmwAS9_Nm2JCko6V4PeSQ8PXxIMUVaucVE3wN-2Nzo
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiYXNkZiIsInVzZXJfaWQiOiIxIiwiZXhwIjoxNTM3NTMzMTMyfQ.qyt47etPnCe6RqUJL1g8gBo4-Z5ZXrH55WgHlc-zJGU
 
 
 ###

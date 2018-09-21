@@ -10,6 +10,7 @@ namespace App\Entity;
 
 use App\Security\Interfaces\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -52,6 +53,7 @@ class User implements EntityInterface, UserInterface
      * @var string
      * @ORM\Column(name="email", type="string", nullable=false)
      * @Assert\NotBlank(message="Please inter email")
+     * @Assert\Email(message="Not correct email")
      *
      */
     private $email;
@@ -60,6 +62,7 @@ class User implements EntityInterface, UserInterface
      * @var string
      * @ORM\Column(name="password", type="string", nullable=false)
      * @Assert\NotBlank(message="Please inter password")
+     * @Serializer\Exclude()
      */
     private $password;
 
@@ -79,6 +82,7 @@ class User implements EntityInterface, UserInterface
     /**
      * @var string
      * @ORM\Column(name="refresh_token", type="text", nullable=true)
+     * @Serializer\Exclude()
      */
     private $refreshToken;
 
