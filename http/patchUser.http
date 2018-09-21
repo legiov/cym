@@ -1,0 +1,6 @@
+PATCH http://cym.loc/users/1
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiY3ltX2RkIiwidXNlcl9pZCI6IjEiLCJleHAiOjE1Mzc1MjQ2MzN9.xQJdEVrTR30-q298xx9FvIPSFgv2RmUTiwkFfuF2HcA
+
+< json/testUser3.json
+###

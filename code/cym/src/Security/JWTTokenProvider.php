@@ -36,7 +36,7 @@ class JWTTokenProvider implements JWTTokenProviderInterface
 //endregion Constructor
 
 //region SECTION: Getters/Setters
-    public function getTokens(UserInterface $user)
+    public function getTokens(UserInterface $user):array
     {
 
         $accessExpire = new \DateTime();
@@ -46,22 +46,22 @@ class JWTTokenProvider implements JWTTokenProviderInterface
         $refreshExpire->modify('+1 day');
 
         return array(
-            'accessToken'  => JWT::encode(
+            self::ACCESS_TOKEN  => JWT::encode(
                 [
                     'name'    => $user->getName(),
-                    'user_id' => $user->getId(),
+                    'user_id' => (string)$user->getId(),
                     'exp'     => $accessExpire->getTimestamp(),
                 ],
                 $secretKey
             ),
-            'refreshToken' => JWT::encode(
+            self::REFRESH_TOKEN => JWT::encode(
                 [
-                    'user_id' => $user->getId(),
+                    'user_id' => (string)$user->getId(),
                     'exp'     => $refreshExpire->getTimestamp(),
                 ],
                 $secretKey
             ),
-            'expires_in'   => $accessExpire->getTimestamp(),
+            self::EXPIRES_IN    => $accessExpire->getTimestamp(),
         );
     }
 //endregion Getters/Setters

@@ -11,10 +11,14 @@ namespace App\Security\Interfaces;
 
 interface JWTTokenProviderInterface
 {
+    public const ACCESS_TOKEN = 'accessToken';
+    public const REFRESH_TOKEN = 'refreshToken';
+    public const EXPIRES_IN = 'expires_in';
+
     /**
      * @param UserInterface $user
      *
      * @return mixed
      */
-    public function getTokens(UserInterface $user);
+    public function getTokens(UserInterface $user):array ;
 }

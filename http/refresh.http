@@ -1,0 +1,5 @@
+GET http://cym.loc/auth/refresh-token
+Content-Type: application/json
+Cookie: XDEBUG_SESSION=PHPSTORM
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMSIsImV4cCI6MTUzNzYwOTgxMn0.FgC14nypxFEbLBZgV3g2Dda4NI1s9prXeGrNFAFs0y0
+###

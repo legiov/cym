@@ -12,12 +12,12 @@ namespace App\Security;
 use App\Entity\User;
 use App\Security\Interfaces\AuthenticationServiceInterface;
 use App\Security\Interfaces\UserTokenInterface;
-use App\Security\Token\UserToken;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 class AuthenticationService implements AuthenticationServiceInterface
 {
+//region SECTION: Fields
     /**
      * @var EntityManagerInterface
      */
@@ -26,45 +26,58 @@ class AuthenticationService implements AuthenticationServiceInterface
      * @var Encoder
      */
     private $encoder;
+    /**
+     * @var SecurityManager
+     */
+    private $securityManager;
+//endregion Fields
 
+//region SECTION: Constructor
     /**
      * AuthenticationService constructor.
      *
      * @param EntityManagerInterface $entityManager
      * @param Encoder                $encoder
+     * @param SecurityManager        $securityManager
      */
-    public function __construct(EntityManagerInterface $entityManager, Encoder $encoder)
+    public function __construct(EntityManagerInterface $entityManager, Encoder $encoder, SecurityManager $securityManager)
     {
-        $this->entityManager = $entityManager;
-        $this->encoder = $encoder;
+        $this->entityManager   = $entityManager;
+        $this->encoder         = $encoder;
+        $this->securityManager = $securityManager;
     }
+//endregion Constructor
 
+//region SECTION: Public
     /**
      * @param UserTokenInterface $userToken
      */
     public function authenticate(UserTokenInterface $userToken)
     {
-        $pass = $userToken->getPassword();
+        $pass  = $userToken->getPassword();
         $email = $userToken->getEmail();
 
-        if(null === $email || null === $pass) {
+        if (null === $email || null === $pass) {
             throw new AuthenticationException();
         }
 
-        $user = $this->entityManager->getRepository(User::class)->findOneBy([
-            'email' => $email,
-        ]);
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(
+            [
+                'email' => $email,
+            ]
+        );
 
-        if(null === $user) {
+        if (null === $user) {
             throw new AuthenticationException();
         }
 
-        if($user->getPassword() !== $this->encoder->encode($pass)) {
+        if ($user->getPassword() !== $this->encoder->encode($pass)) {
             throw new AuthenticationException();
         }
 
         $userToken->setIsAuthenticated(true);
-
+        $this->securityManager->setUser($user);
         $userToken->setUser($user);
     }
+//endregion Public
 }

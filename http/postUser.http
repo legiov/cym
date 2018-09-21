@@ -1,6 +1,6 @@
 POST http://cym.loc/users
 Content-Type: application/json
 
-< testUser.json
+< json/testUser.json
 
 ###

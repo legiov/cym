@@ -1,15 +1,21 @@
 # How to use
 1. Git clone this
 2. ```bash
-        sudo mv mrdoc /usr/local/bin/mrdoc
-    ```
-3. ```bash
         cp env-sample .env
     ```
-    And modify it for your needs
-4. Place your apps in code/%appname% 
-5. Create nginx config in configuration/nginx/sites (examples in congiguration/nginx/conf_example)
-6. add in /etc/hosts - 127.0.0.1 %appnam%
-7. mrdoc build
-8. mrdoc run
-9. PROFIT
+    And modify it for your needs 
+3. add in /etc/hosts - 127.0.0.1 cym.loc
+4. ```bash
+        docker-compose build
+   ```
+5. ```bash
+    docker-compose up -d
+   ```
+6. 
+    ```bash
+    docker-compose exec --user dockuser php72
+    cd cym
+    composer install
+    php bin/console doc:mi:mi
+    ``` 
+7. PROFIT

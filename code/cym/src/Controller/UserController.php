@@ -78,7 +78,7 @@ class UserController extends AbstractRestCrudController
 
     /**
      * @param string $id
-     * @AuthorizedOnly(yourSelf=true)
+     * @AuthorizedOnly()
      * @return View
      */
     public function getAction(string $id):View

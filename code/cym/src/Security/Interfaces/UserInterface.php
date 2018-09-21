@@ -22,4 +22,6 @@ interface UserInterface
     public function getName();
 
     public function getSurname();
+
+    public function getRefreshToken();
 }

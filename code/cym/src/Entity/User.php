@@ -77,6 +77,12 @@ class User implements EntityInterface, UserInterface
     private $avatar;
 
     /**
+     * @var string
+     * @ORM\Column(name="refresh_token", type="text", nullable=true)
+     */
+    private $refreshToken;
+
+    /**
      * @return int
      */
     public function getId(): ?int
@@ -200,6 +206,26 @@ class User implements EntityInterface, UserInterface
     public function setPassword(string $password): User
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRefreshToken(): string
+    {
+        return $this->refreshToken;
+    }
+
+    /**
+     * @param string $refreshToken
+     *
+     * @return User
+     */
+    public function setRefreshToken(string $refreshToken): User
+    {
+        $this->refreshToken = $refreshToken;
 
         return $this;
     }

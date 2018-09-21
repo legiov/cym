@@ -2,5 +2,5 @@ POST http://cym.loc/auth/login
 Content-Type: application/json
 Cookie: XDEBUG_SESSION=PHPSTORM
 
-< authData.json
+< json/authData.json
 ###

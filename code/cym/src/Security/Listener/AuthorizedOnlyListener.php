@@ -61,15 +61,17 @@ class AuthorizedOnlyListener implements EventSubscriberInterface
 //region SECTION: Public
     public function onKernelController(FilterControllerEvent $event)
     {
+        if(!$event->isMasterRequest()) {
+            return;
+        }
+
         $controller = $event->getController();
 
         if (!is_array($controller)) {
             return;
         }
-        $action = $controller[1];
-
         $controllerObject = $controller[0];
-
+        $action = $controller[1];
 
         $refController = new \ReflectionObject($controllerObject);
 
@@ -85,7 +87,7 @@ class AuthorizedOnlyListener implements EventSubscriberInterface
                     $arguments = $argumentsRelolver->getArguments($request, $controller);
                 }
 
-                if (false === $this->jwtTokenValidator->validateToken($propertyAnnotation->yourSelf, $arguments['id'] ?? null)) {
+                if (false === $this->jwtTokenValidator->validateToken($propertyAnnotation->yourSelf, $arguments[0] ?? null)) {
                     throw new HttpException(Response::HTTP_FORBIDDEN, 'Access Denied');
                 }
             }
